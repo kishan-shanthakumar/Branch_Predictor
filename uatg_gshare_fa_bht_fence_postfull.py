@@ -59,7 +59,7 @@ class uatg_gshare_fa_bht_fence_postfull(IPlugin):
         # between call, jump, branch and returns
 
         asm_start = "\taddi t1,x0,0\n\taddi t2,x0,1\n\n"
-        asm_end = "exit:\n\n\taddi x0,x0,0\n\tadd x0,x0,0\n\tfence\n\n"
+        asm_end = "exit:\n\n\taddi x0,x0,0\n\tadd x0,x0,0\n\tfence.i\n\n"
         # variables to store some asm boiler plate
 
         asm_branch = ""

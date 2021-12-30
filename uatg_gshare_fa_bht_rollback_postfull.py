@@ -65,7 +65,7 @@ class uatg_gshare_fa_bht_rollback_postfull(IPlugin):
         	if i == 10:
         		asm += '\taddi t3,t3,-1\n'
         		asm += '\tbeqz t3,exit\n'
-        	asm += f'\taddi t1,x0,0\n\taddi t1,t1,1\n\tbeq t1,1,entry{i+1}\n\n'
+        	asm += f'\taddi t1,x0,0\n\taddi t1,t1,1\n\tbeq t1,t1,entry{i+1}\n\n'
         asm += "entry512 :\n\tj entry1\n\n'
         
         asm = asm_start + asm + asm_end

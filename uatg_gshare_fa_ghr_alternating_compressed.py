@@ -7,7 +7,7 @@ import os
 from typing import Dict, List
 
 
-class uatg_gshare_fa_ghr_alternating_01(IPlugin):
+class uatg_gshare_fa_ghr_alternating_compressed(IPlugin):
 
     def __init__(self):
         """ The constructor for this class. """
@@ -52,10 +52,10 @@ class uatg_gshare_fa_ghr_alternating_01(IPlugin):
         # enter and exit branches.
 
         # initial section in the ASM
-        asm = ".option norvc\n"
+        asm = ""
         asm = asm + '\taddi t0,x0,1\n'
         asm = asm + '\taddi t1,x0,1\n\taddi t2,x0,2\n\n'
-        asm = asm + '\tcbeq  t0,x0,lab0\n'
+        asm = asm + '\tc.beqz  t0,lab0\n'
 
         # the assembly program is structured in a way that
         # there are odd number of labels.
@@ -67,17 +67,17 @@ class uatg_gshare_fa_ghr_alternating_01(IPlugin):
             if i % 2:
                 asm = asm + 'lab' + str(i) + ':\n'
                 asm = asm + '\taddi t0,t0,1\n'
-                asm = asm + '\tcbeq  t0,x0,lab' + str(i + 1) + '\n'
+                asm = asm + '\tc.beqz  t0,lab' + str(i + 1) + '\n'
             else:
                 asm = asm + 'lab' + str(i) + ':\n'
                 asm = asm + '\taddi t0,t0,-1\n'
-                asm = asm + '\tcbeq  t0,x0,lab' + str(i + 1) + '\t\n'
+                asm = asm + '\tc.beqz  t0,lab' + str(i + 1) + '\t\n'
 
         asm = asm + 'lab' + str(self._history_len) + ':\n'
         asm = asm + '\taddi t0,t0,-1\n\n'
         asm = asm + '\taddi t1,t1,-1\n\taddi t2,t2,-1\n'
-        asm = asm + '\tcbeq  t1,x0,lab0\n\taddi t0,t0,2\n'
-        asm = asm + '\tcbeq  t2,x0,lab0\n'
+        asm = asm + '\tc.beqz  t1,lab0\n\taddi t0,t0,2\n'
+        asm = asm + '\tc.beqz  t2,lab0\n'
 
         # compile macros for the test
         compile_macros = []

@@ -53,7 +53,7 @@ class uatg_gshare_fa_bht_rollback_postfull(IPlugin):
 
         This ASM file is written as the ASM file which will be run on the DUT.
         """
-        asm_start = "\taddi t3,x0,2\n\n"
+        asm_start = "\taddi t3,x0,3\n\n"
         asm_end = "exit:\n\n\taddi x0,x0,0\n\tadd x0,x0,0\n\n"
         asm = ''
         # variables to store some asm boiler plate

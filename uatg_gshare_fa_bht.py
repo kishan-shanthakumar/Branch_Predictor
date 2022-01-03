@@ -54,7 +54,7 @@ class uatg_gshare_fa_bht_fill_01(IPlugin):
         This ASM file is written as the ASM file which will be run on the DUT.
         """
 
-        branch_count = int(self._bht_depth / 4)
+        branch_count = int(self._bht_depth)
         # The branch_count is used equally split the instructions
         # between call, jump, branch and returns
 
